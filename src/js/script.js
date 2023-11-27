@@ -93,6 +93,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -157,15 +158,27 @@
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
-          console.log(optionId, option);
 
           // check if it is extra option and if it is chosen
           if (formData[paramId].includes(optionId) && option.default !== true) {
             price += option.price;
-          } 
+          }
           // check if it is default option and if it isn't chosen
-          else if (option.default == true && formData[paramId].includes(optionId) === false){
+          else if (option.default == true && formData[paramId].includes(optionId) === false) {
             price -= option.price;
+          }
+
+          // find each image
+          const images = thisProduct.imageWrapper;
+          const image = images.querySelector('.' + paramId + '-' + optionId);
+
+          // if exists and selected render it
+          if (image !== null && formData[paramId].includes(optionId)){
+            image.classList.add('active');
+          }
+          // if exist and not selected hide it
+          else if (image !== null && formData[paramId].includes(optionId) === false){
+            image.classList.remove('active');
           }
         }
       }
