@@ -168,16 +168,17 @@
             price -= option.price;
           }
 
+          const optionSelected = formData[paramId].includes(optionId);
           // find each image
           const images = thisProduct.imageWrapper;
           const image = images.querySelector('.' + paramId + '-' + optionId);
 
           // if exists and selected render it
-          if (image !== null && formData[paramId].includes(optionId)){
+          if (image !== null && optionSelected){
             image.classList.add('active');
           }
           // if exist and not selected hide it
-          else if (image !== null && formData[paramId].includes(optionId) === false){
+          else if (image !== null && optionSelected === false){
             image.classList.remove('active');
           }
         }
