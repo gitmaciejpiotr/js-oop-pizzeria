@@ -1,43 +1,40 @@
-import {settings, select} from '../settings.js';
+import { settings, select } from '../settings.js';
+import BaseWidget from './BaseWidget.js';
 
-class AmountWidget {
+class AmountWidget extends BaseWidget {
   constructor(element) {
+    super(element, settings.amountWidget.defaultValue);
+
     const thisWidget = this;
 
     thisWidget.getElements(element);
-    if (thisWidget.dom.input.value === '') {
-      thisWidget.setValue(settings.amountWidget.defaultValue);
-    } else {
-      thisWidget.setValue(thisWidget.dom.input.value);
-    }
+    // if (thisWidget.dom.input.value === '') {
+    //   thisWidget.setValue(settings.amountWidget.defaultValue);
+    // } else {
+    //   thisWidget.setValue(thisWidget.dom.input.value);
+    // }
     thisWidget.initActions();
+
+    console.log('AmountWidget:', thisWidget);
   }
 
-  getElements(element) {
+  getElements() {
     const thisWidget = this;
-    thisWidget.dom = {};
 
-    thisWidget.dom.element = element;
-    thisWidget.dom.input = thisWidget.dom.element.querySelector(select.widgets.amount.input);
-    thisWidget.dom.linkDecrease = thisWidget.dom.element.querySelector(select.widgets.amount.linkDecrease);
-    thisWidget.dom.linkIncrease = thisWidget.dom.element.querySelector(select.widgets.amount.linkIncrease);
+    thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
+    thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
+    thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
   }
 
-  setValue(value) {
+  isValid(value) {
+    return !isNaN(value)
+      && value >= settings.amountWidget.defaultMin
+      && value <= settings.amountWidget.defaultMax;
+  }
+
+  renderValue(){
     const thisWidget = this;
 
-    const newValue = parseInt(value);
-    const conditions = thisWidget.value !== newValue
-      && !isNaN(newValue)
-      && newValue >= settings.amountWidget.defaultMin
-      && newValue <= settings.amountWidget.defaultMax;
-
-    /* TODO */
-
-    if (conditions) {
-      thisWidget.value = newValue;
-      thisWidget.announce();
-    }
     thisWidget.dom.input.value = thisWidget.value;
   }
 
@@ -55,15 +52,6 @@ class AmountWidget {
       event.preventDefault();
       thisWidget.setValue(thisWidget.value + 1);
     });
-  }
-
-  announce() {
-    const thisWidget = this;
-
-    const event = new CustomEvent('updated', {
-      bubbles: true
-    })
-    thisWidget.dom.element.dispatchEvent(event);
   }
 }
 
