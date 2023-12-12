@@ -5,22 +5,34 @@ class BaseWidget {
     thisWidget.dom = {};
     thisWidget.dom.wrapper = wrapperElement;
 
-    thisWidget.value = initialValue;
+    thisWidget.correctValue = initialValue;
   }
 
-  setValue(value) {
+  get value(){
+    const thisWidget = this;
+
+    return thisWidget.correctValue;
+  }
+
+  set value(value) {
     const thisWidget = this;
 
     const newValue = thisWidget.parseValue(value);
-    const conditions = thisWidget.value !== newValue
+    const conditions = thisWidget.correctValue !== newValue
       && thisWidget.isValid(newValue)
 
 
     if (conditions) {
-      thisWidget.value = newValue;
+      thisWidget.correctValue = newValue;
       thisWidget.announce();
     }
     thisWidget.renderValue();
+  }
+
+  setValue(value){
+    const thisWidget = this;
+
+    thisWidget.value = value;
   }
 
   parseValue(value) {
