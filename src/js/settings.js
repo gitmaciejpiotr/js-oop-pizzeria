@@ -40,9 +40,22 @@ export const select = {
         },
     },
     booking: {
-        peopleAmount: '.people-amount',
-        hoursAmount: '.hours-amount',
-        tables: '.floor-plan .table',
+        peopleAmount: { 
+            wrapper: '.people-amount',
+            input: '.people-amount input',
+        },
+        hoursAmount: { 
+            wrapper: '.hours-amount',
+            input: '.hours-amount input',
+        },
+        tables: {
+            table: '.floor-plan .table',
+            wrapper: '.floor-plan',
+        },
+        form: '.booking-form',
+        address: '[name="address"]',
+        phone: '[name="phone"]',
+        starterContainer: '.booking-options .option-row',
     },
     nav: {
         links: '.main-nav a',
