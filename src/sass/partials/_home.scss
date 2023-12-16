@@ -1,0 +1,140 @@
+/* GLOBAL */
+
+section {
+    margin: 96px 0 96px 0;
+}
+
+
+/* MAIN TILES */
+
+.main-tiles {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: $font-header;
+    font-weight: 300;
+}
+
+.main-tiles h2 {
+    font-size: 24px;
+}
+
+.option-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 120px;
+}
+
+.option-btn {
+    width: 49.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin-bottom: 6px;
+}
+
+.order-online {
+    background: url(../images/assets/pizza-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.book-table {
+    background: url(../images/assets/pizza-2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.opening-data {
+    background: $color-main;
+    color: white;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.opening-data h2,
+h4 {
+    margin: 5px;
+    text-align: center;
+}
+
+/* CAROUSEL */
+
+* {
+    box-sizing: border-box;
+}
+
+.carousel {
+    background: #EEE;
+}
+
+.carousel-cell {
+    width: 80%;
+    height: 260px;
+    margin-right: 80px;
+    margin-left: 80px;
+    // background: #8C8;
+    border-radius: 5px;
+    counter-increment: gallery-cell;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.carousel-cell .opinion-image {
+    width: 200%;
+    padding-right: 30px;
+}
+
+.carousel-cell .opinion-image img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+/* cell number */
+// .carousel-cell:before {
+//     display: block;
+//     text-align: center;
+//     content: counter(gallery-cell);
+//     line-height: 200px;
+//     font-size: 80px;
+//     color: white;
+// }
+
+
+/* GALLERY */
+
+.gallery {
+    display: block;
+}
+
+.gallery .row {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 200px;
+}
+
+.gallery .img-tile {
+    width: 30%;
+}
+
+.gallery .img-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.instagram-link {
+    color: $color-main;
+}

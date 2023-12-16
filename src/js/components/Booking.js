@@ -35,8 +35,6 @@ class Booking {
       ],
     }
 
-    // console.log('getData params', params);
-
     const urls = {
       booking: settings.db.url + '/' + settings.db.bookings
         + '?' + params.booking.join('&'),
@@ -45,8 +43,6 @@ class Booking {
       eventsRepeat: settings.db.url + '/' + settings.db.events
         + '?' + params.eventsRepeat.join('&'),
     };
-
-    // console.log('getData url: ', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -64,9 +60,6 @@ class Booking {
         ]);
       })
       .then(function ([bookings, eventsCurrent, eventsRepeat]) {
-        // console.log(bookings);
-        // console.log(eventsCurrent);
-        // console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -95,24 +88,17 @@ class Booking {
       }
     }
 
-    // console.log('thisBooking.booked', thisBooking.booked);
     thisBooking.updateDOM();
   }
 
   makeBooked(date, hour, duration, table) {
     const thisBooking = this;
 
-    console.log('Udało się ;): ', date, hour, duration, table);
-
     if (typeof thisBooking.booked[date] == 'undefined') {
       thisBooking.booked[date] = {};
     }
 
-    console.log(typeof hour);
-
     const startHour = utils.hourToNumber(hour);
-
-    console.log(startHour);
 
     for (let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5) {
       if (typeof thisBooking.booked[date][hourBlock] == 'undefined') {
@@ -120,8 +106,6 @@ class Booking {
       }
 
       thisBooking.booked[date][hourBlock].push(table);
-
-      console.log('Heja');
     }
 
   }
@@ -232,8 +216,6 @@ class Booking {
       } else if (event.target.classList.contains('booked')) {
         alert('Stolik niedostępny');
       } 
-
-      console.log(event.target.offsetParent);
     });
 
     thisBooking.dom.form.addEventListener('submit', function (event) {

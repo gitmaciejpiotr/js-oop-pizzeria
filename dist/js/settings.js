@@ -1,5 +1,6 @@
 export const select = {
     templateOf: {
+        homePage: '#template-home-page',
         menuProduct: '#template-menu-product',
         cartProduct: '#template-cart-product',
         bookingWidget: '#template-booking-widget',
@@ -9,6 +10,7 @@ export const select = {
         cart: '#cart',
         pages: '#pages',
         booking: '.booking-wrapper',
+        home: '.home-page-wrapper',
     },
     all: {
         menuProducts: '#product-list > .product',
@@ -139,6 +141,8 @@ export const settings = {
 };
 
 export const templates = {
+    homePage: Handlebars.compile(document.querySelector(select.templateOf.homePage).innerHTML),
+
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
     // CODE ADDED START
     cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
