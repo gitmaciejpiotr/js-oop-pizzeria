@@ -81,6 +81,9 @@ export const select = {
         edit: '[href="#edit"]',
         remove: '[href="#remove"]',
     },
+    homePage: {
+        gallery: '.gallery',
+    }
     // CODE ADDED END
 };
 

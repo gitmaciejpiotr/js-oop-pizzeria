@@ -1,4 +1,4 @@
-import { templates /*select, settings, classNames*/ } from '../settings.js';
+import { templates, select /*settings, classNames*/ } from '../settings.js';
 import { utils } from '../utils.js';
 // import AmountWidget from './AmountWidget.js';
 // import DatePicker from './DatePicker.js';
@@ -6,28 +6,60 @@ import { utils } from '../utils.js';
 
 class HomePage {
     constructor(element) {
-        const thisBooking = this;
+        const thisHomePage = this;
 
-        thisBooking.render(element);
+        thisHomePage.favoriteImages = [];
+
+        thisHomePage.render(element);
+        thisHomePage.initActions();
         // thisBooking.initWidgets();
         // thisBooking.getData();
     }
 
     render(element) {
-        const thisBooking = this;
+        const thisHomePage = this;
 
         const generatedHTML = templates.homePage();
 
-        thisBooking.dom = {};
+        thisHomePage.dom = {};
 
-        thisBooking.dom.wrapper = element;
+        thisHomePage.dom.wrapper = element;
 
         /* Create element using utils.createElementFromHTML */
-        thisBooking.element = utils.createDOMFromHTML(generatedHTML);
+        thisHomePage.element = utils.createDOMFromHTML(generatedHTML);
 
         /* Add element to #menu */
-        thisBooking.dom.wrapper.innerHTML = generatedHTML;
+        thisHomePage.dom.wrapper.innerHTML = generatedHTML;
+
+        thisHomePage.dom.gallery = thisHomePage.dom.wrapper.querySelector(select.homePage.gallery);
     }
+
+    initActions() {
+        const thisHomePage = this;
+    
+        thisHomePage.dom.gallery.addEventListener('click', function (event) {
+          event.preventDefault();
+          if (event.target.offsetParent.classList.contains('layer') && (event.target.classList.contains('fa-heart-o') || event.target.classList.contains('fa-heart'))) {
+            thisHomePage.addToFavorite(event);
+          }
+        });
+    }
+
+    addToFavorite(event) {
+   
+        /* Find book image in clicked element */
+        const imageLikeButton = event.target;
+
+        if (!imageLikeButton.classList.contains('liked')) {
+          imageLikeButton.classList.add('liked');
+          imageLikeButton.classList.remove('fa-heart-o');
+          imageLikeButton.classList.add('fa-heart');
+        } else {
+          imageLikeButton.classList.remove('liked');
+          imageLikeButton.classList.add('fa-heart-o');
+          imageLikeButton.classList.remove('fa-heart');
+        }
+      }
 }
 
 export default HomePage;
